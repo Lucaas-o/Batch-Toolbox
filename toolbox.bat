@@ -1,5 +1,5 @@
 @echo off
-mode con: cols=80 lines=20
+mode con: cols=30 lines=10
 
 title Batch Toolbox Menu
 echo.
