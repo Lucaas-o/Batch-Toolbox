@@ -1,5 +1,11 @@
 @echo off
-echo Hiding file...
+title Folder Hider
+echo.
+echo This tool allows you to hide or reveal folders.
+echo.
+echo Note: Hidden folders will not be visible in File Explorer.
+echo.
+pause
 
 :loop
 set /p action="Do you want to hide or reveal a folder? (h/r): "
@@ -21,5 +27,5 @@ set /p more="Do you want to hide or reveal another folder? (y/n): "
 if /i "%more%"=="y" goto loop
 
 pause
-
+start "" toolbox.bat
 exit
