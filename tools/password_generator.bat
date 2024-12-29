@@ -1,35 +1,27 @@
-@echo off
-title Password Generator
-echo.
-echo This tool generates a random password.
-echo.
-pause
-cls
+@Echo Off
+Setlocal EnableDelayedExpansion
+Set _RNDLength=16  :: Length of the password
+Set _Alphanumeric=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789
+Set _Str=%_Alphanumeric%987654321
+:_LenLoop
+IF NOT "%_Str:~18%"=="" SET _Str=%_Str:~9%& SET /A _Len+=9& GOTO :_LenLoop
+SET _tmp=%_Str:~9,1%
+SET /A _Len=_Len+_tmp
+Set _count=0
+SET _RndAlphaNum=
+:_loop
+Set /a _count+=1
+SET _RND=%Random%
+Set /A _RND=_RND%%%_Len%
+SET _RndAlphaNum=!_RndAlphaNum!!_Alphanumeric:~%_RND%,1!
+If !_count! lss %_RNDLength% goto _loop
 
-setlocal enabledelayedexpansion
-:loop
-:: Set password length (16 characters now)
-set /a length=16
-set "chars=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&"
-set "password="
+:: Output the password to the command line
+Echo Generated Password: !_RndAlphaNum!
 
-:: Generate the password
-for /l %%i in (1,1,%length%) do (
-    set /a rand=!random! %% 68
-    set "password=!password!!chars:~!rand!,1!"
-)
-
-:: Output the generated password
-echo Generated Password: !password!
-
-:: Save the password to a text file
-echo !password! > generated_password.txt
-echo Password saved to generated_password.txt
-
-:: Ask if the user wants to generate another password
-set /p more="Do you want to generate another password? (y/n): "
-if /i "%more%"=="y" goto loop
+:: Save the password to a .txt file
+echo !_RndAlphaNum! > generated_password.txt
+Echo Password saved to generated_password.txt
 
 pause
-start "" toolbox.bat
 exit
