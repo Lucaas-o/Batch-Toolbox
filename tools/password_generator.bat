@@ -1,4 +1,11 @@
 @echo off
+title Password Generator
+echo.
+echo This tool generates a random password.
+echo.
+pause
+cls
+
 setlocal enabledelayedexpansion
 :loop
 set /a length=12
@@ -14,7 +21,5 @@ set /p more="Do you want to generate another password? (y/n): "
 if /i "%more%"=="y" goto loop
 
 pause
-cd..
-start toolbox.bat
-timeout /t 1 /nobreak >nul
+start "" toolbox.bat
 exit

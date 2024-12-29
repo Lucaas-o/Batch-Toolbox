@@ -1,4 +1,6 @@
 @echo off
+title Text Encoder/Decoder
+
 :menu
 cls
 echo ============================
@@ -60,7 +62,8 @@ pause
 goto menu
 
 :exit
-cd..
-start toolbox.bat
-timeout /t 1 /nobreak >nul
+cls
+echo Exiting...
+pause
+start "" toolbox.bat
 exit

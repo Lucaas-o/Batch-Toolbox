@@ -1,7 +1,19 @@
 @echo off
-echo This script requires Administrator privileges to run.
-echo Please run as Administrator to continue.
+:: Check if the script is running with administrator privileges
+NET SESSION >nul 2>&1
+if %errorlevel% NEQ 0 (
+    echo This script requires Administrator privileges to run.
+    echo Please run as Administrator to continue.
+    pause
+    exit
+)
+
+title System Scan
+echo.
+echo This tool performs a system scan to check for errors and issues.
+echo.
 pause
+cls
 
 echo Running System File Checker (sfc)...
 sfc /scannow
@@ -35,9 +47,7 @@ netsh winsock reset
 echo Network Diagnostics reset complete.
 
 echo Press Enter to close this window.
-pause
 
-cd..
-start toolbox.bat
-timeout /t 1 /nobreak >nul
+pause
+start "" toolbox.bat
 exit
