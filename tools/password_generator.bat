@@ -10,12 +10,12 @@ setlocal enabledelayedexpansion
 :loop
 :: Set password length (you can adjust this number)
 set /a length=12
-set "chars=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%%^&*()"
+set "chars=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&"
 set "password="
 
 :: Generate the password
 for /l %%i in (1,1,%length%) do (
-    set /a rand=!random! %% 72
+    set /a rand=!random! %% 68
     set "password=!password!!chars:~!rand!,1!"
 )
 
