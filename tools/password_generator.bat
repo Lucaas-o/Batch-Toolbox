@@ -8,8 +8,8 @@ cls
 
 setlocal enabledelayedexpansion
 :loop
-:: Set password length (you can adjust this number)
-set /a length=12
+:: Set password length (16 characters now)
+set /a length=16
 set "chars=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&"
 set "password="
 
