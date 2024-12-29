@@ -13,11 +13,11 @@ Welcome to the **Batch Toolbox Menu**! This project provides a customizable batc
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/batch-toolbox-menu.git
+   git clone https://github.com/LucasElBobo/Batch-Toolbox.git
    ```
 2. Navigate to the directory:
    ```bash
-   cd batch-toolbox-menu
+   cd Batch-Toolbox
    ```
 3. Run the script:
    ```bash
