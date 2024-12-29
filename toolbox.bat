@@ -1,4 +1,5 @@
 @echo off
+title Batch Toolbox Menu
 :menu
 cls
 echo ============================
@@ -10,7 +11,7 @@ echo 3. Folder Hider
 echo 4. File Search
 echo 5. System Scan
 echo 6. Password Generator
-echo 7. Text Encoder
+echo 7. Text Encoder/Decoder
 echo 8. Exit
 echo ============================
 set /p choice="Select an option: "
