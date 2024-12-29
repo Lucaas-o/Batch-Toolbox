@@ -1,4 +1,6 @@
 @echo off
+mode con: cols=80 lines=20
+
 title Batch Toolbox Menu
 echo.
 echo This is a collection of batch scripts that can be used to perform various tasks.
