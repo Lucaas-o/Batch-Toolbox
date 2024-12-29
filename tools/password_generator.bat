@@ -26,10 +26,6 @@ echo Generated Password: !password!
 echo !password! > generated_password.txt
 echo Password saved to generated_password.txt
 
-:: Copy the password to clipboard
-echo !password! | clip
-echo Password copied to clipboard.
-
 :: Ask if the user wants to generate another password
 set /p more="Do you want to generate another password? (y/n): "
 if /i "%more%"=="y" goto loop
