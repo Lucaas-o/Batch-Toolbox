@@ -1,30 +1,48 @@
 @echo off
-title File Hider
+title File Hider Tool
+color 0A
 echo.
-echo This tool allows you to hide or reveal files on your computer.
+echo This tool hides or reveals files on your computer.
 echo.
-pause
+timeout /t 1 >nul
 cls
 
 :loop
-set /p action="Do you want to hide or reveal a file? (h/r): "
-
+set "action="
+set /p action="Hide or reveal a file? (h/r/q to quit): "
+if /i "%action%"=="q" goto :end
 if /i "%action%"=="h" (
+    set "file="
     set /p file="Enter file path to hide: "
+    if not exist "%file%" (
+        echo File not found. Please check the path.
+        timeout /t 1 >nul
+        goto loop
+    )
     attrib +h "%file%"
-    echo File hidden.
+    echo File hidden: %file%
 ) else if /i "%action%"=="r" (
+    set "file="
     set /p file="Enter file path to reveal: "
+    if not exist "%file%" (
+        echo File not found. Please check the path.
+        timeout /t 1 >nul
+        goto loop
+    )
     attrib -h "%file%"
-    echo File revealed.
+    echo File revealed: %file%
 ) else (
-    echo Invalid choice. Please enter "h" to hide or "r" to reveal.
+    echo Invalid choice. Use 'h' to hide, 'r' to reveal, or 'q' to quit.
+    timeout /t 1 >nul
     goto loop
 )
 
-set /p more="Do you want to hide or reveal another file? (y/n): "
+set "more="
+set /p more="Process another file? (y/n): "
 if /i "%more%"=="y" goto loop
 
-pause
+:end
+echo Returning to main menu...
+timeout /t 1 >nul
 start "" toolbox.bat
-exit
+exit /b 0

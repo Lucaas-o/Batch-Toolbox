@@ -1,36 +1,59 @@
-@Echo Off
-SetLocal EnableExtensions EnableDelayedExpansion
+@echo off
+title Password Generator Tool
+color 0A
+setlocal enabledelayedexpansion
 
-Set "i=-1" 
-For %%_ In (A B C D F G H I J K L M N P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9) Do (
-    Set /A i += 1
-    Set "$.!i!=%%_"
+echo.
+echo This tool generates a random password.
+echo.
+timeout /t 1 >nul
+cls
+
+:LengthInput
+set "length="
+set /p length="Enter password length (8-32, or 'q' to quit): "
+if /i "%length%"=="q" goto :end
+if not defined length (
+    echo Please enter a valid number.
+    timeout /t 1 >nul
+    goto LengthInput
 )
 
-Set /P "length=Enter the password length (between 8 and 32): "
-
-If %length% GEQ 8 If %length% LEQ 32 (
-    Echo You have selected a password length of %length% characters.
-) Else (
-    Echo Invalid input. Please enter a number between 8 and 32.
-    GoTo :LengthInput
+if %length% lss 8 (
+    echo Length must be at least 8 characters.
+    timeout /t 1 >nul
+    goto LengthInput
+)
+if %length% gtr 32 (
+    echo Length cannot exceed 32 characters.
+    timeout /t 1 >nul
+    goto LengthInput
 )
 
-Set "strAN="
-For /L %%_ In (1 1 %length%) Do (
-    Set /A randIndex=!random! %% i
-    Set "char=!$.!randIndex!!"
-    Set "strAN=!strAN!!char!"
+set "chars=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()"
+set "password="
+for /l %%i in (1,1,%length%) do (
+    set /a "rand=!random! %% 70"
+    for %%j in (!rand!) do set "password=!password!!chars:~%%j,1!"
 )
 
-Echo Your generated password: %strAN%
+echo.
+echo Generated Password: !password!
+echo.
 
-set /p saveFile="Save password to file? (Y/N): "
-if /I "%saveFile%"=="Y" (
-    echo %strAN% > generated_password.txt
+set "saveFile="
+set /p saveFile="Save to file? (y/n): "
+if /i "!saveFile!"=="y" (
+    echo !password! > generated_password.txt
     echo Password saved to generated_password.txt
 )
 
-pause
+set "more="
+set /p more="Generate another password? (y/n): "
+if /i "!more!"=="y" goto LengthInput
+
+:end
+echo Returning to main menu...
+timeout /t 1 >nul
 start "" toolbox.bat
-exit
+exit /b 0
